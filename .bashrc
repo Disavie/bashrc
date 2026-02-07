@@ -129,6 +129,7 @@ alias downloads='cd /mnt/c/Users/davis/Downloads'
 BASHRC="$HOME/.bashrc"
 alias vimrc="vim $HOME/.bashrc"
 alias srcrc="source $BASHRC"
+alias vim="nvim"
 
 
 
