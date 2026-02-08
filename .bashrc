@@ -59,10 +59,10 @@ fi
 # THIS IS A CHANGE THAT I MADE!!! it changes the format of the shell \w is working dir, > is the symol at the end. all the ANSI is for color codes
 
 if [ "$color_prompt" = yes ]; then
-	PS1='\[\033[1;34m\]\w\[\033[0m\] : '
+    PS1='\[\e[38;5;216;3m\]\u\[\e[0;97m\] \[\e[0m\]@ \[\e[38;5;189m\]\w\[\e[0m\] \\$ '
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\ $ '
 fi
 unset color_prompt force_color_prompt
 
