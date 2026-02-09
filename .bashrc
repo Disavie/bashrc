@@ -133,9 +133,17 @@ alias vim="nvim"
 
 #alias firefox='cmd.exe /c "C:\Program Files\Mozilla Firefox\firefox.exe" "https://google.com/$@"'
 #alias ff=firefox
-
 firefox() {
-    cmd.exe /c "C:\Program Files\Mozilla Firefox\firefox.exe" "google.com/search?q=$1"
+    if [[ "$1" =~ ^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
+        # Looks like a domain, open it directly
+        url="https://$1"
+    else
+        # Otherwise, treat as search query
+        query=$(IFS=+; echo "$*")
+        url="https://www.google.com/search?q=$query"
+    fi
+
+    cmd.exe /c "C:\Program Files\Mozilla Firefox\firefox.exe" "$url"
 }
 alias ff=firefox
 
