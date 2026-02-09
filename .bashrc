@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+#alias firefox='cmd.exe -c "C:\Program Files\Mozilla Firefox\firefox.exe" "$@"' ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -131,5 +131,11 @@ alias vimrc="vim $HOME/.bashrc"
 alias srcrc="source $BASHRC"
 alias vim="nvim"
 
+#alias firefox='cmd.exe /c "C:\Program Files\Mozilla Firefox\firefox.exe" "https://google.com/$@"'
+#alias ff=firefox
 
+firefox() {
+    cmd.exe /c "C:\Program Files\Mozilla Firefox\firefox.exe" "google.com/search?q=$1"
+}
+alias ff=firefox
 
