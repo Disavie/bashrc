@@ -147,5 +147,10 @@ firefox() {
 }
 alias ff=firefox
 
+#alias discord to launch without output
+alias discord="discord > /dev/null 2>&1 &"
+alias spotify="spotify > /dev/null 2>&1 &"
 
-
+ex() {
+    explorer.exe "$1"
+}
