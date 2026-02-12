@@ -134,21 +134,53 @@ alias vim="nvim"
 #alias firefox='cmd.exe /c "C:\Program Files\Mozilla Firefox\firefox.exe" "https://google.com/$@"'
 #alias ff=firefox
 firefox() {
+    local new_window=false
+    local close_all=false
+
+    # Parse flags
+    while [[ "$1" == -* ]]; do
+        case "$1" in
+            -n)
+                new_window=true
+                shift
+                ;;
+            -x)
+                close_all=true
+                shift
+                ;;
+            *)
+                echo "Unknown option: $1"
+                return 1
+                ;;
+        esac
+    done
+
+    # Close all instances if -x is used
+    if $close_all; then
+        cmd.exe /c taskkill /IM firefox.exe /F 2>/dev/null
+        return 0
+    fi
+
+    # Build URL
     if [[ "$1" =~ ^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ]]; then
-        # Looks like a domain, open it directly
         url="https://$1"
     else
-        # Otherwise, treat as search query
         query=$(IFS=+; echo "$*")
         url="https://www.google.com/search?q=$query"
     fi
 
-    cmd.exe /c "C:\Program Files\Mozilla Firefox\firefox.exe" "$url"
+    # Launch Firefox
+    if $new_window; then
+        cmd.exe /c "C:\Program Files\Mozilla Firefox\firefox.exe" -new-window "$url"
+    else
+        cmd.exe /c "C:\Program Files\Mozilla Firefox\firefox.exe" "$url"
+    fi
 }
+
 alias ff=firefox
 
 #alias discord to launch without output
-alias discord="discord > /dev/null 2>&1 &"
+#alias discord="discord > /dev/null 2>&1 &"
 #alias spotify="spotify > /dev/null 2>&1 &"
 
 ex() {
